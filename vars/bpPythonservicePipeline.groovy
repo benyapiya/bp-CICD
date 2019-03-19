@@ -46,6 +46,7 @@ def call(Map params){
           mergeThenPush(fullUrl, "master")
           mergeThenPush(fullUrl, "master", "master")
           k8sRolloutMicroservice()
+          sleep 10
         }
       }
       stage('Prod Validation') {
