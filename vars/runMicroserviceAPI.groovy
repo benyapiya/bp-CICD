@@ -9,7 +9,7 @@ def call(microserviceHost){
   RESULT = sh (
   script: """curl -X POST -H 'Content-Type: application/json'\
       -d '{ "sentence": "hay"}' \
-      http://${microserviceHost}:9090/sentiment""",
+      http://${microserviceHost}:90/sentiment""",
   returnStdout: true
   ).trim()
 

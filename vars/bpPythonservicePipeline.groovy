@@ -51,7 +51,7 @@ def call(Map params){
       }
       stage('Prod Validation') {
         steps{
-          runPythonserviceAPI("${params.prodHost}")
+          runMicorserviceAPI("${params.prodHost}")
         }
       }
       stage('Cleanup') {
