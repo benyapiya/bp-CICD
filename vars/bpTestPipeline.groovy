@@ -46,7 +46,18 @@ def call(Map params){
         steps {
           mergeThenPush(fullUrl, "master")
           mergeThenPush(fullUrl, "master", "master")
-          //k8sRolloutMicroservice()
+          k8sRolloutMicroservice()
+        }
+      }
+      stage('Prod Validation') {
+        steps{
+          runMicroserviceAPI(${params.prodHost})
+        }
+      }
+      stage('Cleanup') {
+        steps {
+          deletePRBranch(fullUrl, "master")
+          echo "CI/CD has completed successfully!"
         }
       }
     }
