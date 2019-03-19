@@ -53,7 +53,7 @@ def call(Map params){
 
       stage('Promote') {
         steps {
-          mergeThenPush(repo: fullUrl, mergeFrom: pr_master, mergeTo: "master", pushTo: "master")
+          mergeThenPush(fullUrl, mergeFrom: pr_master, mergeTo: "master", pushTo: "master")
           mergeThenPush(repo: fullUrl, mergeFrom: pr_prod, mergeTo: prod_branch, pushTo: prod_branch)
           k8sRolloutMicroservice()
         }
@@ -61,14 +61,12 @@ def call(Map params){
 
       stage('Prod Validation') {
         steps{
-          runMicroserviceAPI(${params.pipelineHost})
+          runMicroserviceAPI(${params.prodHost})
         }
       }
-
       stage('Cleanup') {
         steps {
           deletePRBranch(fullUrl, "master")
-          deletePRBranch(fullUrl, prod_branch)
           echo "CI/CD has completed successfully!"
         }
       }

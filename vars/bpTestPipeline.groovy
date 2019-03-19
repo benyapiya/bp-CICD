@@ -45,6 +45,8 @@ def call(Map params){
       stage('Promote') {
         steps {
           mergeThenPush(fullUrl, "master")
+          mergeThenPush(fullUrl, "master", "master")
+          //k8sRolloutMicroservice()
         }
       }
     }
