@@ -36,7 +36,7 @@ def call(Map params){
           sleep 10
         }
       }
-      stage('Unit Testing on Docker') {
+      stage('Test on Docker') {
         steps {
           runPythonserviceAPI("${params.pipelineHost}")
         }
