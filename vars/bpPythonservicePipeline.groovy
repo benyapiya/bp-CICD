@@ -36,12 +36,12 @@ def call(Map params){
           sleep 10
         }
       }
-      stage('Unit Testing') {
+      stage('Unit Testing on Docker') {
         steps {
           runPythonserviceAPI("${params.pipelineHost}")
         }
       }
-      stage('Promote') {
+      stage('Kubenetes Deploy') {
         steps {
           mergeThenPush(fullUrl, "master")
           mergeThenPush(fullUrl, "master", "master")
