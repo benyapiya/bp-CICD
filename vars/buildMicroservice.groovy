@@ -11,5 +11,5 @@ def call(pipelineHost) {
 
   sh "mvn install"
   sh "docker build -f Dockerfile -t benya/bp-microservice:${env.BRANCH_NAME} ."
-  sh "docker run -d -p 8080:8080 -e SA_LOGIC_API_URL='http://${pipelineHost}:5050' benya/bp-microservice:${env.BRANCH_NAME}"
+  sh "docker run -d -p 9090:8080 -e SA_LOGIC_API_URL='http://${pipelineHost}:5050' benya/bp-microservice:${env.BRANCH_NAME}"
 }
