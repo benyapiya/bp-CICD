@@ -24,7 +24,7 @@ def call(Map params){
             org = scmUrl[1]
             repo = scmUrl[2]
             fullUrl = "${scmUrl[0]}/${org}/${repo}"
-            pr_master = createPRBranch(fullUrl)
+            createPRBranch(fullUrl)
           }
         }
       }
@@ -44,7 +44,7 @@ def call(Map params){
       }
       stage('Promote') {
         steps {
-          mergeThenPush(fullUrl, pr_master, "master")
+          mergeThenPush(fullUrl, "master")
         }
       }
     }
