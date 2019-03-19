@@ -38,7 +38,7 @@ def call(Map params){
       }
       stage('Unit Testing') {
         steps {
-          runPythonserviceAPI("${params.prodHost}")
+          runPythonserviceAPI("${params.pipelineHost}")
         }
       }
     }
