@@ -4,7 +4,7 @@ def call(pythonserviceHost){
   RESULT = sh (
   script: """curl -X POST -H 'Content-Type: application/json'\
       -d '{ "sentence": "hay"}' \
-      https://${pythonserviceHost}:5050/reverse_sentence""",
+      http://${pythonserviceHost}:5050/reverse_sentence""",
   returnStdout: true
   ).trim()
 
