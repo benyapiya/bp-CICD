@@ -22,8 +22,8 @@ def call(Map params){
             // Create PR branches for testing
             pr_master = createPRBrach (fullUrl, "master")
             pr_prod = createPRBrach (fullUrl, prod_branch)
-            mergeThenPush(repo: fullUrl, mergeFrom: pr_master, mergeTo: "master", pushTo: pr_master)
-            mergeThenPush(repo: fullUrl, mergeFrom: pr_qa, mergeTo: prod_branch, pushTo: pr_prod)
+            //mergeThenPush(repo: fullUrl, mergeFrom: pr_master, mergeTo: "master", pushTo: pr_master)
+            //mergeThenPush(repo: fullUrl, mergeFrom: pr_qa, mergeTo: prod_branch, pushTo: pr_prod)
           }
         }
       }
@@ -31,12 +31,12 @@ def call(Map params){
       stage('Build') {
         steps {
           //parallel(
-            "microservice_build" : {
+            //"microservice_build" : {
               // delete container
               // build container from current bode base tag with PR name
               // run container
-              buildMicroservice(${params.pipelineHost})
-            }
+              //buildMicroservice(${params.pipelineHost})
+            //}
 
           // "pythonservice_build" : {
           //   buildPythonservice(${params.pipelineHost})
@@ -47,29 +47,29 @@ def call(Map params){
 
       stage('Unit Testing') {
         steps {
-          runMicroserviceAPI(${params.prodHost})
+          //runMicroserviceAPI(${params.prodHost})
         }
       }
 
       stage('Promote') {
         steps {
-          mergeThenPush(repo: fullUrl, mergeFrom: pr_master, mergeTo: "master", pushTo: "master")
-          mergeThenPush(repo: fullUrl, mergeFrom: pr_prod, mergeTo: prod_branch, pushTo: prod_branch)
-          k8sRolloutMicroservice()
+          //mergeThenPush(repo: fullUrl, mergeFrom: pr_master, mergeTo: "master", pushTo: "master")
+          //mergeThenPush(repo: fullUrl, mergeFrom: pr_prod, mergeTo: prod_branch, pushTo: prod_branch)
+          //k8sRolloutMicroservice()
         }
       }
 
       stage('Prod Validation') {
         steps{
-          runMicroserviceAPI(${params.pipelineHost})
+          //runMicroserviceAPI(${params.pipelineHost})
         }
       }
 
       stage('Cleanup') {
         steps {
-          deletePRBranch(fullUrl, "master")
-          deletePRBranch(fullUrl, prod_branch)
-          echo "CI/CD has completed successfully!"
+          //deletePRBranch(fullUrl, "master")
+          //deletePRBranch(fullUrl, prod_branch)
+          //echo "CI/CD has completed successfully!"
         }
       }
     }
