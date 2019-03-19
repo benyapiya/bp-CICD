@@ -1,10 +1,10 @@
 #!/usr/bin/env groovy
 
-def call(microserviceHost){
+def call(pythonserviceHost){
   RESULT = sh (
   script: """curl -X POST -H 'Content-Type: application/json'\
       -d '{ "sentence": "hay"}' \
-      https://${microserviceHost}:9090/sentiment""",
+      https://${pythonserviceHost}:5050/reverse_sentence""",
   returnStdout: true
   ).trim()
 

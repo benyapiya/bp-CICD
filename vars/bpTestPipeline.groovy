@@ -33,12 +33,12 @@ def call(Map params){
           // delete container
           // build container from current bode base tag with PR name
           // run container
-          buildMicroservice("${params.pipelineHost}")
+          buildPythonservice("${params.pipelineHost}")
         }
       }
       stage('Unit Testing') {
         steps {
-          runMicroserviceAPI("${params.prodHost}")
+          runPythonserviceAPI("${params.prodHost}")
         }
       }
     }
