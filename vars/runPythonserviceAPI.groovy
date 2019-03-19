@@ -8,11 +8,11 @@ def call(pythonserviceHost){
   returnStdout: true
   ).trim()
 
-  RESULT = jsonParse(CERT)
+  RESULT = jsonParse(RESULT)
 
   if (RESULT.polarity != 'yah') {
     throw new Exception("VALIDATION FAILED")
   } else {
-    echo "runMicroservice API passed"
+    echo "runPythonservice API passed"
   }
 }

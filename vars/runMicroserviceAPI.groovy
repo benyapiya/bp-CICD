@@ -8,7 +8,7 @@ def call(microserviceHost){
   returnStdout: true
   ).trim()
 
-  RESULT = jsonParse(CERT)
+  RESULT = jsonParse(RESULT)
 
   if (RESULT.polarity != 'yah') {
     throw new Exception("VALIDATION FAILED")

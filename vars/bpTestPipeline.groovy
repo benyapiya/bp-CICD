@@ -34,6 +34,7 @@ def call(Map params){
           // build container from current bode base tag with PR name
           // run container
           buildPythonservice("${params.pipelineHost}")
+          sleep 10
         }
       }
       stage('Unit Testing') {
