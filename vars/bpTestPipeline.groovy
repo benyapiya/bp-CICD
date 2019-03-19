@@ -38,7 +38,7 @@ def call(Map params){
       }
       stage('Unit Testing') {
         steps {
-          runMicroserviceAPI(${params.prodHost})
+          runMicroserviceAPI("${params.prodHost}")
         }
       }
     }
