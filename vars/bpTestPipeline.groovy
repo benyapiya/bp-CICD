@@ -42,6 +42,11 @@ def call(Map params){
           runPythonserviceAPI("${params.pipelineHost}")
         }
       }
+      stage('Promote') {
+        steps {
+          mergeThenPush(fullUrl, pr_master, "master")
+        }
+      }
     }
   }
 }
