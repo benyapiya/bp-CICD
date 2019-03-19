@@ -41,10 +41,14 @@ def call(Map params){
           runPythonserviceAPI("${params.pipelineHost}")
         }
       }
-      stage('Kubenetes Deploy') {
+      stage('Merge PR') {
         steps {
           mergeThenPush(fullUrl, "master")
           mergeThenPush(fullUrl, "master", "master")
+        }
+      }
+      stage('Kubenetes Deploy') {
+        steps {
           k8sRolloutPythonservice()
           sleep 10
         }
