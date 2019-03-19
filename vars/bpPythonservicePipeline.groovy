@@ -3,8 +3,7 @@
 pass pipeline parameters to Jenkinsfile
 bpPythonservicePipeline (
   pipelineHost: "ip_of_host_to_run_pipeline",
-  prodHost: "ip_of_production_host",
-  email: "your_email"
+  prodHost: "ip_of_production_host"
 )
 */
 def call(Map params){
