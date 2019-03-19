@@ -30,12 +30,10 @@ def call(Map params){
       }
       stage('Build') {
         steps {
-          "microservice_build" : {
-              // delete container
-              // build container from current bode base tag with PR name
-              // run container
-              buildMicroservice(${params.pipelineHost})
-          }
+          // delete container
+          // build container from current bode base tag with PR name
+          // run container
+          buildMicroservice(${params.pipelineHost})
         }
       }
     }
