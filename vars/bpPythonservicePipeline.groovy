@@ -45,13 +45,13 @@ def call(Map params){
         steps {
           mergeThenPush(fullUrl, "master")
           mergeThenPush(fullUrl, "master", "master")
-          k8sRolloutMicroservice()
+          k8sRolloutPythonservice()
           sleep 10
         }
       }
       stage('Prod Validation') {
         steps{
-          runMicroserviceAPI("${params.prodHost}")
+          runPythonserviceAPI("${params.prodHost}")
         }
       }
       stage('Cleanup') {
