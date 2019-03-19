@@ -51,12 +51,12 @@ def call(Map params){
       }
       stage('Prod Validation') {
         steps{
-          runMicroserviceAPI(${params.prodHost})
+          runMicroserviceAPI("${params.prodHost}")
         }
       }
       stage('Cleanup') {
         steps {
-          deletePRBranch(fullUrl, "master")
+          deletePRBranch(fullUrl)
           echo "CI/CD has completed successfully!"
         }
       }
