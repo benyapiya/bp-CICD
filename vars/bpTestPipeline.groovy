@@ -28,11 +28,15 @@ def call(Map params){
           }
         }
       }
-
-    }
-    post {
-      always {
-        emailext attachLog: true, to: '${params.email}', subject: "${env.JOB_NAME} : #${env.BUILD_NUMBER}", body: "Body"
+      stage('Build') {
+        steps {
+          "microservice_build" : {
+              // delete container
+              // build container from current bode base tag with PR name
+              // run container
+              buildMicroservice(${params.pipelineHost})
+          }
+        }
       }
     }
   }
