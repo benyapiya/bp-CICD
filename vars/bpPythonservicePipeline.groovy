@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 /*
 pass pipeline parameters to Jenkinsfile
-bpTestPipeline (
+bpPythonservicePipeline (
   pipelineHost: "ip_of_host_to_run_pipeline",
   prodHost: "ip_of_production_host",
   email: "your_email"
