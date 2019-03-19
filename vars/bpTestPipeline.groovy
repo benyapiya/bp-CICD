@@ -20,7 +20,11 @@ def call(Map params){
         steps {
           script{
             // Create PR branches for testing
-            pr_master = createPRBranch()
+            scmUrl = setGitUrl()
+            org = scmUrl[1]
+            repo = scmUrl[2]
+            fullUrl = "${scmUrl[0]}/${org}/${repo}"
+            pr_master = createPRBranch(fullUrl)
           }
         }
       }
