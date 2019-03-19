@@ -36,6 +36,11 @@ def call(Map params){
           buildMicroservice("${params.pipelineHost}")
         }
       }
+      stage('Unit Testing') {
+        steps {
+          runMicroserviceAPI(${params.prodHost})
+        }
+      }
     }
   }
 }
