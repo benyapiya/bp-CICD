@@ -20,7 +20,7 @@ def call(Map params){
         steps {
           script{
             // Create PR branches for testing
-            pr_master = createPRBrach ("master")
+            pr_master = createPRBranch ("master")
           }
         }
       }
