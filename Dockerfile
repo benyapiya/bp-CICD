@@ -53,3 +53,31 @@ users:\n\
   user:\n\
     token: "k8s_token"\n'\
 >> /root/.kube/config
+
+RUN echo 'apiVersion: extensions/v1beta1\n\
+kind: Deployment\n\
+metadata:\n\
+  name: bp-microservice\n\
+spec:\n\
+  replicas: 2\n\
+  minReadySeconds: 15\n\
+  strategy:\n\
+    type: RollingUpdate\n\
+    rollingUpdate:\n\
+      maxUnavailable: 1\n\
+      maxSurge: 1\n\
+  template:\n\
+    metadata:\n\
+      labels:\n\
+        app: bp-microservice\n\
+    spec:\n\
+      containers:\n\
+      - image: benya/bp-microservice\n\
+        imagePullPolicy: Always\n\
+        name: bp-microservice\n\
+        env:\n\
+          - name: SA_LOGIC_API_URL\n\
+            value: "http://bp-pythonservice"\n\
+        ports:\n\
+          - containerPort: 8080\n\
+>> /root/.kube/bp-microservice-deployment.yaml
