@@ -34,14 +34,14 @@ def call(Map params){
           // delete container
           // build container from current bode base tag with PR name
           // run container
-          buildMicroservice(${params.pipelineHost})
+          buildMicroservice("${params.pipelineHost}")
           sleep 10
         }
       }
 
       stage('Unit Testing') {
         steps {
-          runMicroserviceAPI(${params.pipelineHost})
+          runMicroserviceAPI("${params.pipelineHost}")
         }
       }
 
@@ -59,7 +59,7 @@ def call(Map params){
       }
       stage('Prod Validation') {
         steps{
-          runMicroserviceAPI(${params.prodHost})
+          runMicroserviceAPI("${params.prodHost}")
         }
       }
       stage('Cleanup') {
