@@ -9,7 +9,7 @@ RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" |  tee -a /etc/
 RUN apt-get update -y
 RUN apt-get install -y kubectl
 RUN mkdir -p /root/.kube/
-RUN echo $'apiVersion: extensions/v1beta1\n\
+RUN echo 'apiVersion: extensions/v1beta1\n\
 kind: Deployment\n\
 metadata:\n\
   name: bp-pythonservice\n\
@@ -34,7 +34,7 @@ spec:\n\
             - containerPort: 5000\n'\
 >> /root/.kube/bp-pythonservice-deployment.yaml
 
-RUN echo $'apiVersion: v1\n\
+RUN echo 'apiVersion: v1\n\
 kind: Config\n\
 clusters:\n\
 - cluster:\n\
