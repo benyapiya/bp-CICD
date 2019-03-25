@@ -20,45 +20,43 @@ def call(Map params){
         steps {
           script{
             // Create PR branches for testing
-            pr_master = createPRBrach (fullUrl, "master")
-            pr_prod = createPRBrach (fullUrl, prod_branch)
-            mergeThenPush(repo: fullUrl, mergeFrom: pr_master, mergeTo: "master", pushTo: pr_master)
-            mergeThenPush(repo: fullUrl, mergeFrom: pr_qa, mergeTo: prod_branch, pushTo: pr_prod)
+            scmUrl = setGitUrl()
+            org = scmUrl[1]
+            repo = scmUrl[2]
+            fullUrl = "${scmUrl[0]}/${org}/${repo}"
+            createPRBranch(fullUrl)
           }
         }
       }
 
       stage('Build') {
         steps {
-          //parallel(
-            "microservice_build" : {
-              // delete container
-              // build container from current bode base tag with PR name
-              // run container
-              buildMicroservice(${params.pipelineHost})
-            }
-
-          // "pythonservice_build" : {
-          //   buildPythonservice(${params.pipelineHost})
-          // }
-          //)
+          // delete container
+          // build container from current bode base tag with PR name
+          // run container
+          buildMicroservice(${params.pipelineHost})
+          sleep 10
         }
       }
 
       stage('Unit Testing') {
         steps {
-          runMicroserviceAPI(${params.prodHost})
+          runMicroserviceAPI(${params.pipelineHost})
         }
       }
 
       stage('Promote') {
         steps {
-          mergeThenPush(fullUrl, mergeFrom: pr_master, mergeTo: "master", pushTo: "master")
-          mergeThenPush(repo: fullUrl, mergeFrom: pr_prod, mergeTo: prod_branch, pushTo: prod_branch)
-          k8sRolloutMicroservice()
+          mergeThenPush(fullUrl, "master")
+          mergeThenPush(fullUrl, "master", "master")
         }
       }
-
+      stage('Kubenetes Deploy') {
+        steps {
+          k8sRolloutMicroservice()
+          sleep 10
+        }
+      }
       stage('Prod Validation') {
         steps{
           runMicroserviceAPI(${params.prodHost})
@@ -69,11 +67,6 @@ def call(Map params){
           deletePRBranch(fullUrl, "master")
           echo "CI/CD has completed successfully!"
         }
-      }
-    }
-    post {
-      always {
-        emailext attachLog: true, to: '${params.email}', subject: "${env.JOB_NAME} : #${env.BUILD_NUMBER}", body: "Body"
       }
     }
   }
