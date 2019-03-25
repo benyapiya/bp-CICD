@@ -64,7 +64,7 @@ def call(Map params){
       }
       stage('Cleanup') {
         steps {
-          deletePRBranch(fullUrl, "master")
+          deletePRBranch(fullUrl)
           echo "CI/CD has completed successfully!"
         }
       }
