@@ -79,5 +79,5 @@ spec:\n\
           - name: SA_LOGIC_API_URL\n\
             value: "http://bp-pythonservice"\n\
         ports:\n\
-          - containerPort: 8080\n\
+          - containerPort: 8080\n'\
 >> /root/.kube/bp-microservice-deployment.yaml
