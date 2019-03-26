@@ -40,7 +40,7 @@
       <credentialsId>git_svc</credentialsId>
       <traits>
         <jenkins.scm.impl.trait.WildcardSCMSourceFilterTrait plugin="scm-api@2.2.8">
-          <includes>bp-pythonservice</includes>
+          <includes>bp-pythonservice bp-microservice</includes>
           <excludes></excludes>
         </jenkins.scm.impl.trait.WildcardSCMSourceFilterTrait>
         <org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait>
